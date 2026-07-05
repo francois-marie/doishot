@@ -1,0 +1,22 @@
+# Runtime tracking config, written at deploy time by scripts/generate-config.sh
+config.js
+
+# Local env for deploy tooling
+.env
+
+# Supabase DB tooling — kept local only, never published
+supabase/
+
+# OS / editor cruft
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Local working notes (symlinked Obsidian vault) and tool config
+.vault
+.claude/
+.cursor/
+
+# Local Netlify folder
+.netlify

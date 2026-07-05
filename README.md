@@ -96,11 +96,20 @@ vendor/html-to-image.js # PNG export (vendored, no runtime CDN dependency)
 
 ### Vendored dependencies
 
-| File                      | Package                                                  | Version | SHA-256                                                            |
+| File                      | Package                                                  | Version | SHA-256 (upstream dist)                                            |
 | ------------------------- | -------------------------------------------------------- | ------- | ------------------------------------------------------------------ |
 | `vendor/html-to-image.js` | [html-to-image](https://github.com/bubkoo/html-to-image) | 1.11.11 | `0181b9a4ea3351540751b2e72b6baecb5c2297093fcb0bd2af94fc531cb0fbda` |
 
-See the header comment in each vendored file for update instructions.
+The hash is of the **upstream** dist file; the vendored copy is that file with a
+provenance header prepended, so hashing `vendor/html-to-image.js` directly won't
+match. Verify the vendored copy against upstream instead (prints `OK`):
+
+```sh
+diff <(curl -sL https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.js) \
+     <(sed '1,/^ \*\/$/d' vendor/html-to-image.js) && echo OK
+```
+
+See the header comment in the vendored file for update instructions.
 
 ## Journal branding
 

@@ -5,6 +5,14 @@
 Paste a DOI -> get a clean card with title, authors, source-aware styling, and
 abstract -> export it as a PNG or copy a citation / BibTeX / link.
 
+<p align="center">
+  <a href="#examples">
+    <img src="examples/nature.png" alt="DOIshot card for a Nature paper" width="640">
+  </a>
+  <br>
+  <sub><i>A shot of <a href="https://francoismarieleregent.xyz/doishot/?doi=10.1038/nature12373">10.1038/nature12373</a> — see <a href="#examples">more examples</a>.</i></sub>
+</p>
+
 Licensed under [MIT](LICENSE).
 
 **A live instance runs at [francoismarieleregent.xyz/doishot](https://francoismarieleregent.xyz/doishot).**
@@ -21,6 +29,47 @@ entirely in the browser via:
   didn't deposit one with Crossref (common for APS journals, Nature, …).
 
 All three support CORS, so everything runs client-side.
+
+## Examples
+
+Real shots exported from DOIshot (click a card to open it live). These are the
+same DOIs offered as one-click examples in the app.
+
+<table>
+  <tr>
+    <td width="50%">
+      <a href="https://francoismarieleregent.xyz/doishot/?doi=10.1126/science.1259855"><img src="examples/science.png" alt="Science card" width="100%"></a>
+      <sub><b>Science</b> · <code>10.1126/science.1259855</code></sub>
+    </td>
+    <td width="50%">
+      <a href="https://francoismarieleregent.xyz/doishot/?doi=10.1103/PhysRevX.8.031022"><img src="examples/prx.png" alt="PRX card" width="100%"></a>
+      <sub><b>PRX (APS)</b> · <code>10.1103/PhysRevX.8.031022</code></sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <a href="https://francoismarieleregent.xyz/doishot/?doi=10.22331/q-2024-03-21-1295"><img src="examples/quantum.png" alt="Quantum card" width="100%"></a>
+      <sub><b>Quantum</b> · <code>10.22331/q-2024-03-21-1295</code></sub>
+    </td>
+    <td width="50%">
+      <a href="https://francoismarieleregent.xyz/doishot/?doi=10.48550/arXiv.2303.08774"><img src="examples/arxiv.png" alt="arXiv card" width="100%"></a>
+      <sub><b>arXiv</b> · <code>10.48550/arXiv.2303.08774</code></sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <a href="https://francoismarieleregent.xyz/doishot/?doi=10.1038/s41567-019-0648-8"><img src="examples/nature-physics.png" alt="Nature Physics card" width="100%"></a>
+      <sub><b>Nature Physics</b> · <code>10.1038/s41567-019-0648-8</code></sub>
+    </td>
+    <td width="50%">
+      <a href="https://francoismarieleregent.xyz/doishot/?doi=10.1038/nature12373"><img src="examples/nature.png" alt="Nature card" width="100%"></a>
+      <sub><b>Nature</b> · <code>10.1038/nature12373</code></sub>
+    </td>
+  </tr>
+</table>
+
+Each card carries the journal's own wordmark, fonts, and palette — see
+[Journal branding](#journal-branding) for how that works.
 
 ## Run locally
 

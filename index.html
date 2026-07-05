@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOIshot - Turn any DOI into a beautiful paper snapshot</title>
+  <meta name="description" content="Paste a DOI, get a clean, shareable snapshot of the paper: title, authors, abstract, source - ready to export as an image." />
+  <meta property="og:title" content="DOIshot - DOI snapshots" />
+  <meta property="og:description" content="Turn any DOI into a beautiful, shareable paper snapshot." />
+  <meta name="theme-color" content="#0f172a" />
+  <script>
+    (function () {
+      var p = location.pathname;
+      var base = "/";
+      if (p.length > 1) {
+        if (p.endsWith("/")) {
+          base = p;
+        } else {
+          var last = p.split("/").pop() || "";
+          base = last.indexOf(".") >= 0
+            ? p.slice(0, p.lastIndexOf("/") + 1)
+            : p + "/";
+        }
+      }
+      var el = document.createElement("base");
+      el.href = base;
+      document.head.appendChild(el);
+    })();
+  </script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%84%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="masthead">
+      <h1 class="logo">DOIshot</h1>
+      <p class="tagline">DOI snapshots for the web. Paste a DOI, get a beautiful, shareable card.</p>
+    </header>
+
+    <form id="form" class="searchbar" autocomplete="off">
+      <input
+        id="doi"
+        name="doi"
+        type="text"
+        inputmode="url"
+        placeholder="DOI, arXiv id, or paper URL  |  10.1038/nature12373 · 2303.08774 · nature.com/articles/… · arxiv.org/abs/…"
+        aria-label="DOI"
+        spellcheck="false"
+      />
+      <button id="go" type="submit">Shot</button>
+    </form>
+
+    <div class="examples" id="examples">
+      <span>Try:</span>
+      <button type="button" data-doi="10.1038/nature12373">Nature</button>
+      <button type="button" data-doi="10.1038/s41567-019-0648-8">Nat. Physics</button>
+      <button type="button" data-doi="10.1126/science.1259855">Science</button>
+      <button type="button" data-doi="10.1103/PhysRevX.8.031022">PRX</button>
+      <button type="button" data-doi="10.1103/PhysRevA.52.3457">PRA</button>
+      <button type="button" data-doi="10.1103/PRXQuantum.2.017003">PRX Quantum</button>
+      <button type="button" data-doi="10.22331/q-2024-03-21-1295">Quantum</button>
+      <button type="button" data-doi="10.48550/arXiv.2303.08774">arXiv</button>
+    </div>
+
+    <section id="stage" class="stage" aria-live="polite"></section>
+  </main>
+
+  <footer class="foot">
+    <span>DOIshot</span> · resolves via
+    <a href="https://www.crossref.org/" target="_blank" rel="noopener">Crossref</a>,
+    <a href="https://datacite.org/" target="_blank" rel="noopener">DataCite</a> &amp;
+    <a href="https://openalex.org/" target="_blank" rel="noopener">OpenAlex</a> ·
+    <a href="https://francoismarieleregent.xyz" target="_blank" rel="noopener">fmlr</a>
+  </footer>
+
+  <script src="./config.js"></script>
+  <script src="./vendor/html-to-image.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -861,7 +861,9 @@ async function downloadPng() {
     const dataUrl = await htmlToImage.toPng(card, {
       pixelRatio: custom.pixelRatio,
       backgroundColor: "#ffffff",
-      style: { boxShadow: "none" },
+      // margin 0: the clone inherits the card's auto-centering margins as
+      // fixed px, which shifts it right inside the export canvas
+      style: { boxShadow: "none", margin: "0" },
     });
     const a = document.createElement("a");
     a.download = `doishot-${slug($("#card").querySelector(".title").textContent)}.png`;
@@ -892,7 +894,7 @@ async function copyCardImage(btn) {
     const blob = await htmlToImage.toBlob(card, {
       pixelRatio: custom.pixelRatio,
       backgroundColor: "#ffffff",
-      style: { boxShadow: "none" },
+      style: { boxShadow: "none", margin: "0" },
     });
     await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
     ok = true;

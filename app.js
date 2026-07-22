@@ -585,6 +585,16 @@ function themeFor(data) {
   return { ...base, label };
 }
 
+function cardWidthPx(ratio, sliderWidth) {
+  if (ratio === "auto") return sliderWidth;
+  const [rw, rh] = ratio.split("/").map(Number);
+  if (rh > rw) {
+    // Portrait ratios: slider controls the long edge (height), not CSS width.
+    return Math.round(sliderWidth * rw / rh);
+  }
+  return sliderWidth;
+}
+
 function cardStyle(theme) {
   const titleFallback =
     theme.titleFallback || "Georgia, Times New Roman, serif";
@@ -598,7 +608,7 @@ function cardStyle(theme) {
     `--title-weight:${theme.titleWeight}`,
     `--title-spacing:${theme.titleSpacing}`,
     `--fs-scale:${custom.scale / 100}`,
-    `--card-w:${custom.width}px`,
+    `--card-w:${cardWidthPx(custom.ratio, custom.width)}px`,
   ];
   if (theme.metaFont) vars.push(`--meta-font:'${theme.metaFont}',${bodyFallback}`);
   if (theme.titleColor) vars.push(`--title-color:${theme.titleColor}`);
@@ -794,7 +804,7 @@ function renderResult(data) {
         <output id="out-width">${custom.width}px</output></span>
       <span class="ctl"><label for="ctl-ratio">Ratio</label>
         <select id="ctl-ratio">
-          ${[["auto", "Auto"], ["16/9", "16:9"], ["4/3", "4:3"], ["1/1", "1:1"], ["4/5", "4:5"]]
+          ${[["auto", "Auto"], ["16/9", "16:9"], ["9/16", "9:16"], ["4/3", "4:3"], ["1/1", "1:1"], ["4/5", "4:5"]]
             .map(([v, t]) => `<option value="${v}" ${custom.ratio === v ? "selected" : ""}>${t}</option>`).join("")}
         </select></span>
       <span class="ctl"><label for="ctl-px">Export</label>

@@ -138,7 +138,7 @@ Under the field toggles, per shot:
 - **Style** - Journal (branded) or Minimal (neutral badge card)
 - **Font size** - 75-145 % scale of the whole card
 - **Width** - 560-1000 px card width
-- **Ratio** - Auto height, or fixed 16:9 / 4:3 / 1:1 / 4:5
+- **Ratio** - Auto height, or fixed 16:9 / 9:16 / 4:3 / 1:1 / 4:5
 - **Export** - 1x / 2x / 3x PNG pixel density
 
 ## Deep links

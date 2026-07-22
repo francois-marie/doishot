@@ -860,21 +860,53 @@ function renderResult(data) {
 }
 
 /* ---------- Exports ---------- */
-async function downloadPng() {
+
+// Paint a rounded-rect path (for clipping export corners to match CSS radius).
+function roundRectPath(ctx, x, y, w, h, r) {
+  const radius = Math.min(r, w / 2, h / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.arcTo(x + w, y, x + w, y + h, radius);
+  ctx.arcTo(x + w, y + h, x, y + h, radius);
+  ctx.arcTo(x, y + h, x, y, radius);
+  ctx.arcTo(x, y, x + w, y, radius);
+  ctx.closePath();
+}
+
+// Render the card to a canvas with transparent rounded corners.
+// html-to-image alone keeps a rectangular bitmap; CSS border-radius is visual only.
+async function renderCardCanvas() {
   const card = $("#card");
+  if (!card) throw new Error("no-card");
+  if (currentData) await ensureFonts(activeTheme(currentData));
+  const pixelRatio = custom.pixelRatio;
+  const source = await htmlToImage.toCanvas(card, {
+    pixelRatio,
+    // No backgroundColor: leave pixels outside the clip transparent.
+    // margin 0: the clone inherits the card's auto-centering margins as
+    // fixed px, which shifts it right inside the export canvas
+    style: { boxShadow: "none", margin: "0" },
+  });
+  const radiusCss = parseFloat(getComputedStyle(card).borderRadius);
+  const radius = (Number.isFinite(radiusCss) ? radiusCss : 16) * pixelRatio;
+  const out = document.createElement("canvas");
+  out.width = source.width;
+  out.height = source.height;
+  const ctx = out.getContext("2d");
+  roundRectPath(ctx, 0, 0, out.width, out.height, radius);
+  ctx.clip();
+  ctx.drawImage(source, 0, 0);
+  return out;
+}
+
+async function downloadPng() {
   const btn = $("#png");
   const prev = btn.textContent;
   btn.textContent = "Rendering…";
   btn.disabled = true;
   try {
-    if (currentData) await ensureFonts(activeTheme(currentData));
-    const dataUrl = await htmlToImage.toPng(card, {
-      pixelRatio: custom.pixelRatio,
-      backgroundColor: "#ffffff",
-      // margin 0: the clone inherits the card's auto-centering margins as
-      // fixed px, which shifts it right inside the export canvas
-      style: { boxShadow: "none", margin: "0" },
-    });
+    const canvas = await renderCardCanvas();
+    const dataUrl = canvas.toDataURL("image/png");
     const a = document.createElement("a");
     a.download = `doishot-${slug($("#card").querySelector(".title").textContent)}.png`;
     a.href = dataUrl;
@@ -899,12 +931,10 @@ async function copyCardImage(btn) {
   if (btn) { btn.textContent = "Rendering…"; btn.disabled = true; }
   let ok = false;
   try {
-    if (currentData) await ensureFonts(activeTheme(currentData));
     if (!navigator.clipboard || !window.ClipboardItem) throw new Error("no-clipboard-api");
-    const blob = await htmlToImage.toBlob(card, {
-      pixelRatio: custom.pixelRatio,
-      backgroundColor: "#ffffff",
-      style: { boxShadow: "none", margin: "0" },
+    const canvas = await renderCardCanvas();
+    const blob = await new Promise((resolve, reject) => {
+      canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("toBlob-failed"))), "image/png");
     });
     await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
     ok = true;

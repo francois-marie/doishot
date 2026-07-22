@@ -273,9 +273,19 @@ html, body {
   font-size: 0.83em;
 }
 .card .doi.end { justify-content: flex-end; }
-.card .doi a { color: var(--accent, var(--badge)); text-decoration: none; word-break: break-all; }
+.card .doi a,
+.card .doi .mark {
+  flex: 0 0 calc(50% - 6px);
+  min-width: 0;
+}
+.card .doi a { color: var(--accent, var(--badge)); text-decoration: none; word-break: break-word; }
 .card .doi a:hover { text-decoration: underline; }
-.card .doi .mark { color: #cbd5e1; font-weight: 700; letter-spacing: .04em; white-space: nowrap; }
+.card .doi .mark {
+  color: #cbd5e1;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-align: right;
+}
 
 /* Copy note + field checklist (not exported) */
 .copynote {

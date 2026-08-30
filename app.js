@@ -302,7 +302,7 @@ async function resolve(doi) {
  * Ground truth (extracted 2026-07 from each site's CSS):
  *  - nature.com     -> Palatino serif stack (Harding is proprietary), links #025e8d, meta #626262
  *  - journals.aps.org -> Noto Sans, links #00538b, ink #2e2f35 (unified 2024 design)
- *  - quantum-journal.org -> Raleway headings (600) + Open Sans, purple #53257f / cyan #03c4eb
+ *  - quantum-journal.org -> Raleway headings (600) + Open Sans, purple #53257f
  *  - arxiv.org      -> Lucida Grande system stack, arXiv red #b31b1b
  *  - science.org    -> hard-blocks non-browsers; official wordmark + brand red
  *                      #c8102e with close free fonts (approximation).
@@ -389,7 +389,7 @@ const JOURNAL_THEME_RULES = [
   },
   {
     // quantum-journal.org: Raleway 600 headings, Open Sans body,
-    // purple #53257f + cyan #03c4eb from their theme stylesheet.
+    // purple #53257f from their brand palette.
     match: (d) =>
       /^10\.22331\//i.test(d.doi) ||
       /^quantum$/i.test((d.container || "").trim()),
@@ -405,7 +405,7 @@ const JOURNAL_THEME_RULES = [
       titleColor: "#2d2d2d",
       textColor: "#333333",
       metaColor: "#6b6b6b",
-      rule: "#03c4eb",
+      rule: "#53257f",
       ruleWidth: "3px",
       topbarHeight: "0px",
       logo: `${ASSETS}/quantum/logo.png`,

@@ -121,7 +121,7 @@ each site's live stylesheet (extracted 2026-07):
 | -------------------------------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------- |
 | Nature / Nature Physics (any 10.1038)        | official wordmark SVGs from nature.com | Palatino serif stack + Merriweather Sans meta (_Harding is proprietary and not redistributed_) | link blue `#025e8d`, meta `#626262`   |
 | APS: PRX, PRA, PRX Quantum, PRL, … (10.1103) | APS logo SVG + journal name            | Noto Sans (what journals.aps.org uses)                                                         | APS blue `#00538b`, ink `#2e2f35`     |
-| Quantum (10.22331)                           | quantum-journal.org logo               | Raleway 600 headings + Open Sans                                                               | purple `#53257f`, cyan rule `#03c4eb` |
+| Quantum (10.22331)                           | quantum-journal.org logo               | Raleway 600 headings + Open Sans                                                               | purple `#53257f` |
 | arXiv (10.48550)                             | official arxiv.org logo SVG            | Lucida Grande system stack (arXiv serves no webfont)                                           | arXiv red `#b31b1b`                   |
 | Science (10.1126)                            | official AAAS wordmark (Wikimedia)     | Source Serif 4 + Libre Franklin (_approximation_ - science.org hard-blocks non-browser access) | Science red `#c8102e`                 |
 
